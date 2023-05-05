@@ -67,7 +67,8 @@ echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
 # Setup git
 git config --global user.email "$USER_EMAIL"
 git config --global user.name "$USER_NAME"
-git config --global http.postBuffer 524288000
+git config --global http.postBuffer 1048576000
+git config --global core.compression -1
 
 {
 	git clone --single-branch --depth 1 --branch "$TARGET_BRANCH" "$GIT_CMD_REPOSITORY" "$CLONE_DIR"
@@ -125,6 +126,7 @@ fi
 echo "[+] Copying contents of source repository folder $SOURCE_DIRECTORY to folder $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
 cp -ra "$SOURCE_DIRECTORY"/. "$CLONE_DIR/$TARGET_DIRECTORY"
 cd "$CLONE_DIR"
+git config -l
 
 echo "[+] Files that will be pushed"
 ls -la
